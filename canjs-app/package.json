@@ -1,0 +1,89 @@
+{
+  "name": "canrealtime",
+  "version": "0.0.0",
+  "description": "An awesome realtime canjs demo",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donejs-user/canjs.git"
+  },
+  "author": {
+    "name": "Matt Chaffe",
+    "email": "matt@mattchaffe.uk",
+    "url": "https://donejs.com"
+  },
+  "private": true,
+  "scripts": {
+    "test": "testee test.html --browsers firefox --reporter Spec",
+    "start": "done-serve --port 8080",
+    "develop": "done-serve --develop --port 8080",
+    "build": "node build"
+  },
+  "main": "canrealtime/index.stache!done-autorender",
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "",
+    "donejs-app"
+  ],
+  "steal": {
+    "main": "canrealtime/index.stache!done-autorender",
+    "directories": {
+      "lib": "src"
+    },
+    "configDependencies": [
+      "live-reload",
+      "node_modules/can-zone/register",
+      "node_modules/steal-conditional/conditional"
+    ],
+    "plugins": [
+      "done-css",
+      "done-component",
+      "steal-less",
+      "steal-stache"
+    ],
+    "envs": {
+      "server-production": {
+        "renderingBaseURL": "/dist"
+      }
+    },
+    "serviceBaseURL": "",
+    "bundle": [
+      "~/pages/**/",
+      "~/pages/**/*.component"
+    ]
+  },
+  "dependencies": {
+    "@feathersjs/authentication-client": "^1.0.8",
+    "@feathersjs/feathers": "^3.2.3",
+    "@feathersjs/socketio-client": "^1.1.5",
+    "can": "^5.16.0",
+    "can-query-logic": "^1.1.7",
+    "can-route-pushstate": "^5.0.7",
+    "can-set": "^1.6.0",
+    "can-stache-route-helpers": "^1.1.1",
+    "can-zone": "^1.0.0",
+    "done-autorender": "^2.4.3",
+    "done-component": "^2.2.0",
+    "done-css": "^3.0.2",
+    "done-serve": "^3.0.0",
+    "generator-donejs": "^3.0.0",
+    "socket.io-client": "^2.2.0",
+    "steal": "^2.1.6",
+    "steal-less": "^1.2.2",
+    "steal-socket.io": "^4.2.0",
+    "steal-stache": "^4.1.2"
+  },
+  "devDependencies": {
+    "can-debug": "^2.0.1",
+    "can-route-hash": "^1.0.1",
+    "donejs-cli": "^3.0.0-pre.5",
+    "funcunit": "^3.6.1",
+    "steal-conditional": "^1.0.0",
+    "steal-qunit": "^1.0.1",
+    "steal-tools": "^2.0.9",
+    "testee": "^0.8.1"
+  },
+  "license": "ISC"
+}

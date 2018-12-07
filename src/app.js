@@ -1,42 +1,40 @@
-import { DefineMap, route } from 'can'
-import RoutePushstate from 'can-route-pushstate'
-import debug from 'can-debug#?./is-dev'
+const logger = require('./logger')
 
-//! steal-remove-start
-if (debug) {
-  debug()
-}
-//! steal-remove-end
+const feathers = require('@feathersjs/feathers')
+const configuration = require('@feathersjs/configuration')
+const express = require('@feathersjs/express')
+const socketio = require('@feathersjs/socketio')
 
-const AppViewModel = DefineMap.extend('AppViewModel', {
-  env: {
-    default: () => ({ NODE_ENV: 'development' })
-  },
-  title: {
-    default: 'canjs'
-  },
-  routeData: {
-    default: () => route.data
-  },
-  pageComponentModuleName: {
-    get () {
-      switch (this.routeData.page) {
-        case 'messages': return '~/pages/messages/'
-        default: return '~/pages/home/'
-      }
-    }
-  },
-  pageComponent: {
-    get () {
-      return steal.import(this.pageComponentModuleName)
-        .then(({ default: Component }) => {
-          return new Component()
-        })
-    }
-  }
-})
+const middleware = require('./middleware')
+const services = require('./services')
+const appHooks = require('./app.hooks')
+const channels = require('./channels')
 
-route.urlData = new RoutePushstate()
-route.register('{page}', { page: 'home' })
+const authentication = require('./authentication')
 
-export default AppViewModel
+const app = express(feathers())
+
+// Load app configuration
+app.configure(configuration())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+// Set up Plugins and providers
+app.configure(express.rest())
+app.configure(socketio())
+
+// Configure other middleware (see `middleware/index.js`)
+app.configure(middleware)
+app.configure(authentication)
+// Set up our services (see `services/index.js`)
+app.configure(services)
+// Set up event channels (see channels.js)
+app.configure(channels)
+
+// Configure a middleware for 404s and the error handler
+app.use(express.notFound())
+app.use(express.errorHandler({ logger }))
+
+app.hooks(appHooks)
+
+module.exports = app

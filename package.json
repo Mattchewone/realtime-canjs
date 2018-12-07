@@ -1,89 +1,56 @@
 {
-  "name": "canrealtime",
+  "name": "realtime",
+  "description": "",
   "version": "0.0.0",
-  "description": "An awesome realtime canjs demo",
   "homepage": "",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/donejs-user/canjs.git"
-  },
+  "main": "src",
+  "keywords": [
+    "feathers"
+  ],
   "author": {
     "name": "Matt Chaffe",
-    "email": "matt@mattchaffe.uk",
-    "url": "https://donejs.com"
+    "email": "matt@mattchaffe.uk"
   },
-  "private": true,
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/"
+  },
+  "engines": {
+    "node": "^9.0.0",
+    "npm": ">= 3.0.0"
+  },
   "scripts": {
-    "test": "testee test.html --browsers firefox --reporter Spec",
-    "start": "done-serve --port 8080",
-    "develop": "done-serve --develop --port 8080",
-    "build": "node build"
-  },
-  "main": "canrealtime/index.stache!done-autorender",
-  "files": [
-    "src"
-  ],
-  "keywords": [
-    "",
-    "donejs-app"
-  ],
-  "steal": {
-    "main": "canrealtime/index.stache!done-autorender",
-    "directories": {
-      "lib": "src"
-    },
-    "configDependencies": [
-      "live-reload",
-      "node_modules/can-zone/register",
-      "node_modules/steal-conditional/conditional"
-    ],
-    "plugins": [
-      "done-css",
-      "done-component",
-      "steal-less",
-      "steal-stache"
-    ],
-    "envs": {
-      "server-production": {
-        "renderingBaseURL": "/dist"
-      }
-    },
-    "serviceBaseURL": "",
-    "bundle": [
-      "~/pages/**/",
-      "~/pages/**/*.component"
-    ]
+    "test": "npm run eslint && NODE_ENV= npm run jest",
+    "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "dev": "nodemon src/",
+    "start": "node src/",
+    "jest": "jest"
   },
   "dependencies": {
-    "@feathersjs/authentication-client": "^1.0.8",
+    "@feathersjs/authentication": "^2.1.13",
+    "@feathersjs/authentication-jwt": "^2.0.7",
+    "@feathersjs/authentication-local": "^1.2.7",
+    "@feathersjs/configuration": "^2.0.4",
+    "@feathersjs/errors": "^3.3.4",
+    "@feathersjs/express": "^1.2.7",
     "@feathersjs/feathers": "^3.2.3",
-    "@feathersjs/socketio-client": "^1.1.5",
-    "can": "^5.16.0",
-    "can-query-logic": "^1.1.7",
-    "can-route-pushstate": "^5.0.7",
-    "can-set": "^1.6.0",
-    "can-stache-route-helpers": "^1.1.1",
-    "can-zone": "^1.0.0",
-    "done-autorender": "^2.4.3",
-    "done-component": "^2.2.0",
-    "done-css": "^3.0.2",
-    "done-serve": "^3.0.0",
-    "generator-donejs": "^3.0.0",
-    "socket.io-client": "^2.2.0",
-    "steal": "^2.1.6",
-    "steal-less": "^1.2.2",
-    "steal-socket.io": "^4.2.0",
-    "steal-stache": "^4.1.2"
+    "@feathersjs/socketio": "^3.2.7",
+    "compression": "^1.7.3",
+    "cors": "^2.8.4",
+    "feathers-memory": "^2.2.0",
+    "feathers-nedb": "^3.1.0",
+    "helmet": "^3.15.0",
+    "nedb": "^1.8.0",
+    "serve-favicon": "^2.5.0",
+    "winston": "^3.1.0"
   },
   "devDependencies": {
-    "can-debug": "^2.0.1",
-    "can-route-hash": "^1.0.1",
-    "donejs-cli": "^3.0.0-pre.5",
-    "funcunit": "^3.6.1",
-    "steal-conditional": "^1.0.0",
-    "steal-qunit": "^1.0.1",
-    "steal-tools": "^2.0.9",
-    "testee": "^0.8.1"
-  },
-  "license": "ISC"
+    "eslint": "^5.9.0",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.5",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
 }
