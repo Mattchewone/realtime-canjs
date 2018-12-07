@@ -1,0 +1,9 @@
+{{# if(messages.length) }}
+  <ul>
+    {{# for(message of messages) }}
+      <li>{{ message.name }}</li>
+    {{/ for }}
+  </ul>
+{{ else }}
+  <h1>Loading</h1>
+{{/ if }}

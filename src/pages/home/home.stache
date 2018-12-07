@@ -1,0 +1,5 @@
+<can-import from="can-stache-route-helpers" />
+
+<a href="{{routeUrl(page='messages')}}">
+  Messages
+</a>
