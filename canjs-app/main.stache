@@ -1,0 +1,20 @@
+<div id="app">
+  {{# if(this.sessionPromise.isPending) }}
+    <h1>Loading...</h1>
+  {{ else }}
+    <ul class="navigation">
+      {{# if(this.currentUser) }}
+        <!-- logged in -->
+        <li><a>User: {{ this.currentUser.email }}</a></li>
+        <li><a href="{{ routeUrl(page='messages') }}">Messages</a></li>
+        <li><a on:click="logout">Logout</a></li>
+      {{ else }}
+        <!-- Not logged in -->
+        <li><a href="{{ routeUrl(page='login') }}">Login</a></li>
+        <li><a href="{{ routeUrl(page='signup') }}">Signup</a></li>
+      {{/ if}}
+    </ul>
+
+    {{ this.componentToShow }}
+  {{/ if}}
+</div>

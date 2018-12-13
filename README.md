@@ -2,26 +2,29 @@
 
 Demo using feathersjs channels to filter realtime data.
 
-## Getting started
+## Getting started in development
 
 To install all dependencies, (e.g. after cloning it from a Git repository) run
 
+Terminal 1 (Client)
 ```
-npm install donejs -g
-npm install
+cd canjs-app
+npm i
+npm start
 ```
 
-## Issues
-
-- Will not load when in `ssr` mode cannot resolve the `@feathers` deps and instead returns the index html.
-- When using a http-server to serve static files and load the `development.html` page it will load initially and and you can click the messages link to navigate to messages. Which will load the data, but after a refresh the page will not load and this error is thrown:
+Terminal 2 (Server)
 ```
-Promise Error
-    at Promise.promiseThen (http://localhost:8080/node_modules/can-zone/lib/zones/globals.js:88:26)
-    at renderInZone (http://localhost:8080/src/index.stache:280:6)
-    at eval (http://localhost:8080/src/index.stache:89:17)
-    at Task.run (http://localhost:8080/node_modules/can-zone/lib/zone.js:43:17)
-    at Zone.run (http://localhost:8080/node_modules/can-zone/lib/zone.js:210:26)
-    at reattachWithZone (http://localhost:8080/src/index.stache:87:6)
-    at eval (http://localhost:8080/src/index.stache:358:6)
-``` 
+npm i
+npm start
+```
+
+Visit `localhost:8080` to see the CanJS app
+
+## Production build (served by feathers)
+
+```
+npm run build
+npm start
+```
+This will build the CanJS app and put it into the root public folder which will be server by FeathersJS

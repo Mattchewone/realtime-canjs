@@ -24,6 +24,7 @@
   "scripts": {
     "test": "npm run eslint && NODE_ENV= npm run jest",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "build": "rm -rf public && mkdir public && cd canjs-app && npm run build && cp -r dist ../public/dist && cp production.html ../public/index.html",
     "dev": "nodemon src/",
     "start": "node src/",
     "jest": "jest"
