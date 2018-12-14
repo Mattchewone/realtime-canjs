@@ -1,4 +1,4 @@
-import { Component } from 'can'
+import { Component, stacheRouteHelpers } from 'can'
 
 
 export default Component.extend({

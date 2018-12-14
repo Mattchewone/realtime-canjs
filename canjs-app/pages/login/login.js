@@ -7,7 +7,7 @@ export default Component.extend({
   view: `<div>
   <h1>Login</h1>
   <div>
-    <form on:click="this.login(scope.event)">
+    <form on:submit="this.login(scope.event)">
       <input name="username" placeholder="Username" value:to="this.username">
       <input name="password" type="password" placeholder="Password" value:to="this.password">
       <button type="submit">Login</button>

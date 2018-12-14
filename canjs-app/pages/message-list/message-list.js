@@ -1,4 +1,4 @@
-import { Component, DefineMap } from 'can'
+import { Component, stacheRouteHelpers } from 'can'
 
 import Messages from '../../models/messages'
 import Session from '../../models/session'
