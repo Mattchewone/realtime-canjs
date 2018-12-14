@@ -18,7 +18,7 @@ const Session = DefineMap.extend('Session', { seal: false }, {
     }
   },
   userError: {
-    get(lastVal, setVal) {
+    get (lastVal, setVal) {
       if (this.userPromise) {
         this.userPromise.catch(setVal)
       }
@@ -26,7 +26,7 @@ const Session = DefineMap.extend('Session', { seal: false }, {
     }
   },
   userPromise: {
-    get() {
+    get () {
       if (this.userId) {
         return User.get({ _id: this.userId })
       }

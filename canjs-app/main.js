@@ -23,13 +23,13 @@ Component.extend({
       }
     },
     authError: {
-      get(lastVal, setVal) {
+      get (lastVal, setVal) {
         this.sessionPromise.catch(setVal)
         return null
       }
     },
     currentUser: {
-      get(lastVal, setVal) {
+      get (lastVal, setVal) {
         return Session.current && Session.current.user
       }
     },
@@ -48,9 +48,9 @@ Component.extend({
           })
       }
     },
-  
-    get componentToShow() {
-      switch(this.routeData.page) {
+
+    get componentToShow () {
+      switch (this.routeData.page) {
         case 'messages':
           return new MessageList()
         case 'login':
@@ -61,11 +61,11 @@ Component.extend({
           return new HomePage()
       }
     },
-  
+
     logout () {
-  
+
     },
-  
+
     init () {
       this.sessionPromise
         .then(user => ('messages'))

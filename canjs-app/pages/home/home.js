@@ -1,6 +1,5 @@
 import { Component, stacheRouteHelpers } from 'can'
 
-
 export default Component.extend({
   tag: 'page-home',
   view: `<h1>Home page</h1>

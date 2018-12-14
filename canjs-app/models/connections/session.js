@@ -9,7 +9,7 @@ import dataCallbacks from 'can-connect/data/callbacks/'
 import realTime from 'can-connect/real-time/real-time'
 import feathersSessionBehavior from 'can-connect-feathers/session'
 
-const sessionConnection = function(options) {
+const sessionConnection = function (options) {
   return connect([
     feathersSessionBehavior,
     dataParse,
