@@ -7,6 +7,10 @@ import User from './user'
 const Session = DefineMap.extend('Session', { seal: false }, {
   userId: 'string',
   accessToken: 'string',
+  exp: {
+    identity: true,
+    type: 'string'
+  },
 
   user: {
     Type: User,

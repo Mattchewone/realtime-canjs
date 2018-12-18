@@ -29,9 +29,7 @@ Component.extend({
       }
     },
     currentUser: {
-      get (lastVal, setVal) {
-        return Session.current && Session.current.user
-      }
+      get: () => Session.current.user
     },
     sessionPromise: {
       type: 'any',

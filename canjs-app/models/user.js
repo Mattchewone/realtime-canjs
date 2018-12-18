@@ -1,15 +1,13 @@
-import DefineMap from 'can-define/map/'
-import DefineList from 'can-define/list/list'
-import canSet from 'can-set'
+import { DefineMap, DefineList, QueryLogic } from 'can'
 import feathersClient from '../feathers-client'
 import feathersConnection from './connections/feathers'
-
-const algebra = new canSet.Algebra(
-  canSet.props.id('_id')
-)
+import feathersQueryLogic from 'feathers-query-logic'
 
 const User = DefineMap.extend({
-  _id: 'string',
+  _id: {
+    identity: true,
+    type: 'string'
+  },
   email: 'string',
   password: 'string'
 })
@@ -34,12 +32,12 @@ User.List = DefineList.extend({
 })
 
 User.connection = feathersConnection({
+  idProp: '_id',
   Map: User,
   List: User.List,
   name: 'user',
-  idProp: '_id',
   feathersService: feathersClient.service('users'),
-  algebra
+  queryLogic: new QueryLogic(User, feathersQueryLogic)
 })
 
 export default User
