@@ -9,78 +9,59 @@ import './message-list.less'
 export default Component.extend({
   tag: 'message-list',
   view: `<div>
-  <h1>Messages</h1>
-  <div>
-    <form on:submit="sendMessage(scope.event)">
-      <input name="to" placeholder="To" value:bind="to">
-      <input name="msg" placeholder="Message.." value:bind="msg">
-      <button type="submit">Create</button>
-    </form>
-  </div>
-  <div class="wrapper" >
-    {{# for(message of messages) }}
-      <section>
-        <div>
-          TO: {{ users.usersById[message.to].email }}
-        </div>
-        <div>
-          MSG: {{ message.name }}
-        </div>
-        <div>
-          FROM: {{ users.usersById[message.from].email }}
-        </div>
-        <div>
-          {{# eq(message.from, user._id) }}
-            <input type="text" value:bind="message.name">
-            <button type="button" on:click="updateMessage(scope.event, message)">Save</button>
-          {{/ eq}}
-        </div>
-      {{/ for}}
-    </section>
-  </div>
-</div>`,
+      <h1>Messages</h1>
+      <div>
+        <form on:submit="sendMessage(scope.event)">
+          <input name="to" placeholder="To" value:bind="to">
+          <input name="msg" placeholder="Message.." value:bind="msg">
+          <button type="submit">Create</button>
+        </form>
+      </div>
+      <div class="wrapper" >
+        {{# for(message of messages) }}
+          <section>
+            <div>
+              TO: {{ users.usersById[message.to].email }}
+            </div>
+            <div>
+              MSG: {{ message.name }}
+            </div>
+            <div>
+              FROM: {{ users.usersById[message.from].email }}
+            </div>
+            <div>
+              {{# eq(message.from, user._id) }}
+                <input type="text" value:bind="message.name">
+                <button type="button" on:click="updateMessage(scope.event, message)">Save</button>
+              {{/ eq}}
+            </div>
+          {{/ for}}
+        </section>
+      </div>
+    </div>`,
   ViewModel: {
     msg: 'string',
     to: 'string',
-
-    messages: {
-      get (last, resolve) {
-        this.messagesAndUsers
-          .then(response => resolve(response[0]))
-        return []
-      }
-    },
-    users: {
-      get (last, resolve) {
-        this.messagesAndUsers
-          .then(response => resolve(response[1]))
-        return []
-      }
-    },
+    messages: 'any',
+    users: 'any',
 
     get messagesAndUsers () {
       return Promise.all([
         this.messagesPromise,
-        this.userPromise
+        this.usersPromise
       ])
     },
 
-    get user () {
-      return Session.current.user
+    user: {
+      get: () => Session.current.user
     },
 
     messagesPromise: {
-      get () {
-        if (Session.current.user) {
-          return Messages.findAll({ $or: [{ from: Session.current.user._id }, { to: Session.current.user._id }] })
-        }
-      }
+      default: () => Messages.getList({ $or: [{ from: Session.current.user._id }, { to: Session.current.user._id }] })
     },
 
-    userPromise: {
-      default () {
-        return User.findAll()
-      }
+    usersPromise: {
+      default: () => User.getList()
     },
 
     sendMessage (event) {
@@ -103,6 +84,18 @@ export default Component.extend({
       event.preventDefault()
 
       message.save()
+    },
+
+    connectedCallback () {
+      // Listen to the session prop so we can load messages
+      // once we have an user
+      this.listenTo('user', (e, newVal) => {
+        // Load both users and messages and assign to VM
+        this.messagesAndUsers.then(([messages, users]) => {
+          this.messages = messages
+          this.users = users
+        })      
+      })
     }
   }
 })
