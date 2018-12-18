@@ -6,15 +6,15 @@ import Session from '../../models/session'
 export default Component.extend({
   tag: 'page-signup',
   view: `<div>
-<h1>Signup</h1>
-<div>
-  <form on:submit="this.createUser(scope.event)">
-    <input name="username" placeholder="Username" value:to="this.username">
-    <input name="password" type="password" placeholder="Password" value:to="this.password">
-    <button type="submit">Signup</button>
-  </form>
-</div>
-</div>`,
+    <h1>Signup</h1>
+    <div>
+      <form on:submit="this.createUser(scope.event)">
+        <input name="username" placeholder="Username" value:to="this.username">
+        <input name="password" type="password" placeholder="Password" value:to="this.password">
+        <button type="submit">Signup</button>
+      </form>
+    </div>
+    </div>`,
   ViewModel: {
     username: 'string',
     password: 'string',
